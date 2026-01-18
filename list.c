@@ -10,18 +10,33 @@
     } \
 }
 
-static void _resize(struct List* l) {
-	if (ls->len >= ls->capacity) {
-		unsigned int capacity_new = ls->capacity * GROWTH_FACTOR;
-		if (capacity_new < INITIAL_CAPACITY) capacity_new = INITIAL_CAPACITY;
-		db* new_arr = (db*)realloc(ls->arr, capacity_new * sizeof(db));
-		checkAlloc(new_arr);
-		ls->arr = new_arr;
-		ls->capacity = capacity_new;
+static void _resizeIfNeeded(struct List* l) {
+	if (l->len >= l->capacity) {
+		unsigned int newCapacity = l->capacity * LIST_GROWTH_FAC;
+		if (newCapacity < LIST_INIT_SIZE) newCapacity = LIST_INIT_SIZE;
+		db* newArr = (db*)realloc(l->arr, newCapacity * sizeof(db));
+		checkAlloc(newArr);
+		l->arr = newArr;
+		l->capacity = newCapacity;
 	}
 }
 
 struct List List(void) {
 	struct List out;
-	out.arr = (db*) 
+	out.arr = (db*)calloc(LIST_INIT_SIZE, sizeof(db));
+	checkAlloc(out.arr);
+	out.len = 0;
+	out.capacity = LIST_INIT_SIZE;
+	return out;
+}
+
+void appendList(struct List* l, const db n) {
+	_resizeIfNeeded(l);
+	l->arr[l->len] = n;
+	l->len++;
+}
+
+db popList(struct List* l) {
+	l->len--;
+	return l->arr[l->len];
 }
