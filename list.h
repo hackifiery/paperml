@@ -8,6 +8,7 @@
 struct List {
     db* arr;
     unsigned int len;
+    unsigned int capacity; // internal use
 };
 
 struct List List(void);
