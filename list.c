@@ -5,7 +5,7 @@
 #include <math.h>
 
 /* internal */
-static void _resizeIfNeeded(struct List* l) {
+static void _resizeIfNeeded(List* l) {
 	if (l->len >= l->capacity) {
 		unsigned int newCapacity = l->capacity * LIST_GROWTH_FAC;
 		if (newCapacity < LIST_INIT_SIZE) newCapacity = LIST_INIT_SIZE;
@@ -16,8 +16,8 @@ static void _resizeIfNeeded(struct List* l) {
 	}
 }
 
-struct List List(void) {
-	struct List out;
+List initList(void) {
+	List out;
 	out.arr = (db*)calloc(LIST_INIT_SIZE, sizeof(db));
 	checkAlloc(out.arr);
 	out.len = 0;
@@ -25,26 +25,26 @@ struct List List(void) {
 	return out;
 }
 
-void appendList(struct List* l, const db n) {
+void appendList(List* l, const db n) {
 	_resizeIfNeeded(l);
 	l->arr[l->len] = n;
 	l->len++;
 }
 
-db popList(struct List* l) {
+db popList(List* l) {
 	if (l->len == 0) printErr("Error: can't pop from empty List");
 
 	l->len--;
 	return l->arr[l->len];
 }
 
-void attachList(const struct List src, struct List* dest) {
+void attachList(const List src, List* dest) {
     for (int i = 0; i < src.len; i++) {
         appendList(dest, src.arr[i]);
     }
 }
 
-db getList(const struct List l, const unsigned int idx) {
+db getList(const List l, const unsigned int idx) {
     if (idx >= l.len) {
         char error_msg[100];
         snprintf(error_msg, sizeof(error_msg), 
@@ -54,7 +54,7 @@ db getList(const struct List l, const unsigned int idx) {
     return l.arr[idx];
 }
 
-int findList(const struct List* list, db value) {
+int findList(const List* list, db value) {
     if (!list) return -1;
     
     for (unsigned int i = 0; i < list->len; i++) {
@@ -66,7 +66,7 @@ int findList(const struct List* list, db value) {
     return -1;
 }
 
-void insertList(struct List* list, unsigned int index, db value) {
+void insertList(List* list, unsigned int index, db value) {
     if (!list) return;
     
     if (index > list->len) {
@@ -89,7 +89,7 @@ void insertList(struct List* list, unsigned int index, db value) {
     list->len++;
 }
 
-db popAtList(struct List* list, unsigned int index) {
+db popAtList(List* list, unsigned int index) {
     if (!list) return 0.0;
     
     if (index >= list->len) {
@@ -111,7 +111,7 @@ db popAtList(struct List* list, unsigned int index) {
     return removed_value;
 }
 
-void reverseList(struct List* list) {
+void reverseList(List* list) {
     if (!list || list->len <= 1) return;
     
     unsigned int left = 0;
@@ -128,7 +128,7 @@ void reverseList(struct List* list) {
     }
 }
 
-void sortList(struct List* list) {
+void sortList(List* list) {
     // bubblesort for now
     if (!list || list->len <= 1) return;
     

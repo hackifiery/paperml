@@ -1,7 +1,7 @@
 #include "list.h"
 
 int main(void) {
-    struct List l = List();
+    List l = initList();
     for (int i = 0; i < 10; i++) appendList(&l, i);
     popList(&l);
     popAtList(&l, 3);
