@@ -58,7 +58,7 @@ int findList(const List* list, db value) {
     if (!list) return -1;
     
     for (unsigned int i = 0; i < list->len; i++) {
-        // Compare floating point values with epsilon
+        /* Compare floating point values with epsilon */
         if (fabs(list->arr[i] - value) < 1e-12) {
             return (int)i;
         }
@@ -76,15 +76,15 @@ void insertList(List* list, unsigned int index, db value) {
         printErr(error_msg);
     }
     
-    // Ensure there's enough capacity
+    /* Ensure there's enough capacity */
     _resizeIfNeeded(list);
     
-    // Shift elements to the right
+    /* Shift elements to the right */
     for (unsigned int i = list->len; i > index; i--) {
         list->arr[i] = list->arr[i - 1];
     }
     
-    // Insert the new value
+    /* Insert the new value */
     list->arr[index] = value;
     list->len++;
 }
@@ -99,10 +99,10 @@ db popAtList(List* list, unsigned int index) {
         printErr(error_msg);
     }
     
-    // Store the value to be removed
+    /* Store the value to be removed */
     db removed_value = list->arr[index];
     
-    // Shift elements to the left
+    /* Shift elements to the left */
     for (unsigned int i = index; i < list->len - 1; i++) {
         list->arr[i] = list->arr[i + 1];
     }
@@ -118,7 +118,7 @@ void reverseList(List* list) {
     unsigned int right = list->len - 1;
     
     while (left < right) {
-        // Swap elements
+        /* Swap elements */
         db temp = list->arr[left];
         list->arr[left] = list->arr[right];
         list->arr[right] = temp;
@@ -129,7 +129,7 @@ void reverseList(List* list) {
 }
 
 void sortList(List* list) {
-    // bubblesort for now
+    /* bubblesort for now */
     if (!list || list->len <= 1) return;
     
     for (unsigned int i = 0; i < list->len - 1; i++) {
@@ -144,7 +144,7 @@ void sortList(List* list) {
             }
         }
         
-        // If no swaps occurred, the list is already sorted
+        /* If no swaps occurred, the list is already sorted */
         if (!swapped) break;
     }
 }

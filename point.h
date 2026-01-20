@@ -5,26 +5,26 @@
 
 #include "types.h"
 
-/* A point at (x, y). */
+/* A point at (x, y) */
 typedef struct {
     db x;
     db y;
 } Point;
 
-/* Initialize a point at (x, y). */
+/* Initialize a point at (x, y) */
 Point initPoint(const db x, const db y);
 
-/* Calculate the euclidian distance between two points. */
+/* Calculate the euclidian distance between two points */
 db distance(const Point p1, const Point p2);
 
-/* Rotate a point by angle_radians about a center. */
+/* Rotate a point by angle_radians about a center */
 void rotate(Point* p, const Point center, const db angle_radians);
 
-/* Rotate a point by angle_radians about the origin. */
+/* Rotate a point by angle_radians about the origin */
 void orotate(Point* p, const db angle_radians);
 
-/* Calculate the slope of the line formed by two points. */
+/* Calculate the slope of the line formed by two points */
 db slope(const Point p1, const Point p2);
 
-/* Check if three points are collinear. */
+/* Check if three points are collinear */
 int areCollinear(const Point p1, const Point p2, const Point p3);

@@ -16,17 +16,17 @@ db distance(const Point p1, const Point p2) {
 }
 
 void rotate(Point* p, const Point center, const db angle_radians) {
-    // Translate point to origin
+    /* Translate point to origin */
     db translated_x = p->x - center.x;
     db translated_y = p->y - center.y;
     
-    // Rotate
+    /* Rotate */
     db cos_theta = cos(angle_radians);
     db sin_theta = sin(angle_radians);
     db new_x = translated_x * cos_theta - translated_y * sin_theta;
     db new_y = translated_x * sin_theta + translated_y * cos_theta;
     
-    // Translate back
+    /* Translate back */
     p->x = new_x + center.x;
     p->y = new_y + center.y;
 }
@@ -38,7 +38,7 @@ void orotate(Point* p, const db angle_radians) {
 db slope(const Point p1, const Point p2) {
     db dx = p2.x - p1.x;
     
-    // Check if denominator is near zero (vertical line)
+    /* Check if denominator is near zero (vertical line) */
     if (fabs(dx) < EPSILON) {
         return INFINITY;
     }
@@ -47,7 +47,7 @@ db slope(const Point p1, const Point p2) {
 }
 
 int areCollinear(const Point p1, const Point p2, const Point p3) {
-    // triangle method: if the triangle's area is 0, they're coll.
+    /* triangle method: if the triangle's area is 0, they're collinear */
     db area = p1.x * (p2.y - p3.y) +
               p2.x * (p3.y - p1.y) +
               p3.x * (p1.y - p2.y);
