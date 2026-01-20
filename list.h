@@ -16,7 +16,7 @@ typedef struct {
 List initList(void);
 
 /* Append a value to the list */
-void appendList(List* ls, const db n);
+void appendList(List* list, const db n);
 
 /* Remove and return the last value */
 db popList(List* list);
@@ -38,6 +38,9 @@ db popAtList(List* list, unsigned int index);
 
 /* Reverse the list in-place */
 void reverseList(List* list);
+
+/* Get the sum of all values in a list*/
+db sumList(const List list);
 
 /* Sort the list using bubble sort */
 void sortList(List* list);

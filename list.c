@@ -25,17 +25,17 @@ List initList(void) {
 	return out;
 }
 
-void appendList(List* l, const db n) {
-	_resizeIfNeeded(l);
-	l->arr[l->len] = n;
-	l->len++;
+void appendList(List* list, const db n) {
+	_resizeIfNeeded(list);
+	list->arr[list->len] = n;
+	list->len++;
 }
 
-db popList(List* l) {
-	if (l->len == 0) printErr("Error: can't pop from empty List");
+db popList(List* list) {
+	if (list->len == 0) printErr("Error: can't pop from empty List");
 
-	l->len--;
-	return l->arr[l->len];
+	list->len--;
+	return list->arr[list->len];
 }
 
 void attachList(const List src, List* dest) {
@@ -46,10 +46,10 @@ void attachList(const List src, List* dest) {
 
 db getList(const List l, const unsigned int idx) {
     if (idx >= l.len) {
-        char error_msg[100];
-        snprintf(error_msg, sizeof(error_msg), 
+        char errorMsg[100];
+        snprintf(errorMsg, sizeof(errorMsg), 
                  "Error: index %u out of bounds (list length: %u)\n", idx, l.len);
-        printErr(error_msg);
+        printErr(errorMsg);
     }
     return l.arr[idx];
 }
@@ -70,10 +70,10 @@ void insertList(List* list, unsigned int index, db value) {
     if (!list) return;
     
     if (index > list->len) {
-        char error_msg[100];
-        snprintf(error_msg, sizeof(error_msg),
+        char errorMsg[100];
+        snprintf(errorMsg, sizeof(errorMsg),
                  "Error: index %u out of bounds (list length: %u)\n", index, list->len);
-        printErr(error_msg);
+        printErr(errorMsg);
     }
     
     /* Ensure there's enough capacity */
@@ -93,10 +93,10 @@ db popAtList(List* list, unsigned int index) {
     if (!list) return 0.0;
     
     if (index >= list->len) {
-        char error_msg[100];
-        snprintf(error_msg, sizeof(error_msg),
+        char errorMsg[100];
+        snprintf(errorMsg, sizeof(errorMsg),
                  "Error: index %u out of bounds (list length: %u)\n", index, list->len);
-        printErr(error_msg);
+        printErr(errorMsg);
     }
     
     /* Store the value to be removed */
@@ -126,6 +126,12 @@ void reverseList(List* list) {
         left++;
         right--;
     }
+}
+
+db sumList(const List list) {
+    db sum = 0;
+    for (int i = 0; i < list.len; i++) sum += list.arr[i];
+    return sum;
 }
 
 void sortList(List* list) {

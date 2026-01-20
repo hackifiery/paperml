@@ -15,24 +15,24 @@ db distance(const Point p1, const Point p2) {
     return sqrt(dx * dx + dy * dy);
 }
 
-void rotate(Point* p, const Point center, const db angle_radians) {
+void rotate(Point* p, const Point center, const db angleRadians) {
     /* Translate point to origin */
-    db translated_x = p->x - center.x;
-    db translated_y = p->y - center.y;
+    db translatedX = p->x - center.x;
+    db translatedY = p->y - center.y;
     
     /* Rotate */
-    db cos_theta = cos(angle_radians);
-    db sin_theta = sin(angle_radians);
-    db new_x = translated_x * cos_theta - translated_y * sin_theta;
-    db new_y = translated_x * sin_theta + translated_y * cos_theta;
+    db cosTheta = cos(angleRadians);
+    db sinTheta = sin(angleRadians);
+    db newX = translatedX * cosTheta - translatedY * sinTheta;
+    db newY = translatedX * sinTheta + translatedY * cosTheta;
     
     /* Translate back */
-    p->x = new_x + center.x;
-    p->y = new_y + center.y;
+    p->x = newX + center.x;
+    p->y = newY + center.y;
 }
 
-void orotate(Point* p, const db angle_radians) {
-    rotate(p, ORIGIN, angle_radians);
+void orotate(Point* p, const db angleRadians) {
+    rotate(p, ORIGIN, angleRadians);
 }
 
 db slope(const Point p1, const Point p2) {
