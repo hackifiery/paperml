@@ -103,7 +103,7 @@ LinReg linreg(const Plane pl) {
 
 void printLinReg(const LinReg lr) {
     printf("Linear Regression results:\n");
-    printf("Final line: y = %gx+%g\n", lr.line.slope, lr.line.intercept);
+    printf("Final line: y = %gx + %g\n", lr.line.slope, lr.line.intercept);
     printf("Error (MSE): %g\n", lr.error);
     printf("R-Squared percentage: %g%%\n", 100*lr.rSquared);
 }
