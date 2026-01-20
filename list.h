@@ -5,76 +5,39 @@
 #define LIST_INIT_SIZE 10
 #define LIST_GROWTH_FAC 2
 
-/**
-* @brief A dynamically resizing array with other cool features & stuff.
-*/
+/* A dynamically resizing array with other cool features & stuff. */
 typedef struct {
-    db* arr; /** @warning DO NOT directly index, use getList() instead. */
-    unsigned int len; /** @brief The length (or size) of the List. */
-    unsigned int capacity; /** @brief internal use. @warning Don't modify! */
+    db* arr;
+    unsigned int len;
+    unsigned int capacity;
 } List;
 
-/** Initializes a List. */
+/* Initialize a List. */
 List initList(void);
 
-/**
-* @brief Append the value n to l.
-* @param l The List you are appending to.
-* @param n The value to append.
-*/
+/* Append a value to the list. */
 void appendList(List* ls, const db n);
 
-/**
-* @brief Pops the last value of l and returns it.
-* @param l The List to pop.
-*/
+/* Remove and return the last value. */
 db popList(List* list);
 
-/**
-* @brief Attaches all of src to dest.
-* @param src The source List.
-* @param dest The destination List.
-*/
+/* Attach all elements from src to dest. */
 void attachList(const List src, List* dest);
 
-/**
-* @brief Gets the value at index idx in List l.
-* @param l The list to get the value of.
-* @param idx The index of the value to get.
-*/
+/* Get the value at an index. */
 db getList(const List l, const unsigned int idx);
 
-/**
-* @brief Finds the first occurence of value in List list, otherwise returns -1.
-* @param list The List.
-* @param value The value to find.
-*/
+/* Find the first occurrence of a value, returns -1 if not found. */
 int findList(const List* list, db value);
 
-/**
-* @brief Inserts value at index in list.
-* @param list The List.
-* @param index The index to insert.
-* @param value The value to insert.
-*/
+/* Insert a value at an index. */
 void insertList(List* list, unsigned int index, db value);
 
-/**
-* @brief Pops and returns the value at index in list.
-* @param list The List.
-* @param index The index of the value to remove.
-*/
+/* Remove and return the value at an index. */
 db popAtList(List* list, unsigned int index);
 
-/**
-* @brief Reverse list (in-place).
-* @param list The List to be reversed.
-*/
+/* Reverse the list in-place. */
 void reverseList(List* list);
 
-/**
-* @brief Bubble-sorts list.
-* TODO: implement a better sorting algo
-* @param list The List to be sorted.
-*/
+/* Sort the list using bubble sort. */
 void sortList(List* list);

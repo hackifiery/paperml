@@ -5,53 +5,26 @@
 
 #include "types.h"
 
-/** @brief a point at (x, y). */
+/* A point at (x, y). */
 typedef struct {
     db x;
     db y;
 } Point;
 
-/**
-* @brief Initializes a point at (x, y).
-* @param x The x-coordinate.
-* @param y The y-coordinate.
-*/
+/* Initialize a point at (x, y). */
 Point initPoint(const db x, const db y);
 
-/**
-* @brief Finds the euclidian distance between Points p1 and p2.
-* @param p1 The first point.
-* @param p2 The second point.
-*/
+/* Calculate the euclidian distance between two points. */
 db distance(const Point p1, const Point p2);
 
-
-/**
-* @brief Rotates Point p by angle_radians radians about center.
-* @param p The Point to rotate.
-* @param center The Point to rotate about.
-* @param angle_radians The angle to roatate, in radians.
-*/
+/* Rotate a point by angle_radians about a center. */
 void rotate(Point* p, const Point center, const db angle_radians);
 
-/**
-* @brief Rotates Point p by angle_radians about the origin.
-* @param p The Point to rotate.
-* @param angle_radians The angle to roatate, in radians.
-*/
+/* Rotate a point by angle_radians about the origin. */
 void orotate(Point* p, const db angle_radians);
 
-/**
-* @brief Compute the slope of the line formed by p1 and p2.
-* @param p1 The first point.
-* @param p2 The second point.
-*/
+/* Calculate the slope of the line formed by two points. */
 db slope(const Point p1, const Point p2);
 
-/**
-* @brief Check if three points are collinear.
-* @param p1 The first point.
-* @param p2 The second point.
-* @param p3 The third point.
-*/
+/* Check if three points are collinear. */
 int areCollinear(const Point p1, const Point p2, const Point p3);
