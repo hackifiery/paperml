@@ -7,9 +7,9 @@ int main(void) {
     srand(time(NULL));
     Plane pl = initPlane();
     for (int i = 0; i <= 10; i++) {
-        double r1 = (double)rand() / (double)RAND_MAX*1;
-        double r2 = (double)rand() / (double)RAND_MAX*1;
-        addPoint(&pl, initPoint(i + r1, i + r2));
+        double r1 = (double)rand() / (double)RAND_MAX*10;
+        double r2 = (double)rand() / (double)RAND_MAX*10;
+        addPoint(&pl, initPoint(i, i));
     }
     LinReg lr = linreg(pl);
     printLinReg(lr);

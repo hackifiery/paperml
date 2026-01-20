@@ -102,8 +102,27 @@ LinReg linreg(const Plane pl) {
 }
 
 void printLinReg(const LinReg lr) {
+    /* ANSI color codes */
+    #define RED     "\x1b[31m"
+    #define YELLOW  "\x1b[33m"
+    #define GREEN   "\x1b[32m"
+    #define RESET   "\x1b[0m"
+    /* Determine color based on R-squared value */
+    const char* color;
+    if (lr.rSquared > 0.7) {
+        color = GREEN;
+    } else if (lr.rSquared > 0.4) {
+        color = YELLOW;
+    } else {
+        color = RED;
+    }
+    #undef RED
+    #undef YELLOW
+    #undef GREEN
+    
     printf("Linear Regression results:\n");
     printf("Final line: y = %gx + %g\n", lr.line.slope, lr.line.intercept);
     printf("Error (MSE): %g\n", lr.error);
-    printf("R-Squared percentage: %g%%\n", 100*lr.rSquared);
+    printf("R-Squared percentage: %s%g%%%s\n", color, 100*lr.rSquared, RESET);
+    #undef RESET
 }
