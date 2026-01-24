@@ -1,6 +1,6 @@
 #include "linreg.h"
 #include "helpers.h"
-#include "list.h"
+#include "vector.h"
 #include "plane.h"
 #include "point.h"
 #include "types.h"
@@ -17,10 +17,10 @@ typedef enum {
 static db planeSum(const Plane pl, const PlaneSumType pst) {
     switch (pst) {
         case X: {
-            return sumList(pl.xVals);
+            return sumVector(pl.xVals);
         }
         case Y: {
-            return sumList(pl.yVals);
+            return sumVector(pl.yVals);
         }
         case XTimesX: {
             db sum = 0;
@@ -43,7 +43,7 @@ static db getErr(const Point p1, const Point p2) {
 }
 
 db getTss(const Plane pl) {
-    db meanY = sumList(pl.yVals) / (db)pl.size;
+    db meanY = sumVector(pl.yVals) / (db)pl.size;
     db totSumSq = 0;
     for (int i = 0; i < pl.size; i++) {
         db diff = pl.yVals.arr[i] - meanY;

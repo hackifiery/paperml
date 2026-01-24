@@ -1,0 +1,46 @@
+#pragma once
+
+#include "types.h"
+
+#define VECTOR_INIT_SIZE 10
+#define VECTOR_GROWTH_FAC 2
+
+/* A dynamically resizing array with other cool features & stuff */
+typedef struct {
+    db* arr;
+    unsigned int len;
+    unsigned int capacity;
+} Vector;
+
+/* Initialize a Vector */
+Vector initVector(void);
+
+/* Append a value to the vector */
+void appendVector(Vector* vec, const db n);
+
+/* Remove and return the last value */
+db popVector(Vector* vec);
+
+/* Attach all elements from src to dest */
+void attachVector(const Vector src, Vector* dest);
+
+/* Get the value at an index */
+db getVector(const Vector v, const unsigned int idx);
+
+/* Find the first occurrence of a value, returns -1 if not found */
+int findVector(const Vector* vec, db value);
+
+/* Insert a value at an index */
+void insertVector(Vector* vec, unsigned int index, db value);
+
+/* Remove and return the value at an index */
+db popAtVector(Vector* vec, unsigned int index);
+
+/* Reverse the vector in-place */
+void reverseVector(Vector* vec);
+
+/* Get the sum of all values in a vector*/
+db sumVector(const Vector vec);
+
+/* Sort the vector using bubble sort */
+void sortVector(Vector* vec);

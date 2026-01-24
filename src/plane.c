@@ -4,36 +4,36 @@
 
 Plane initPlane(void) {
     Plane p;
-    p.xVals = initList();
-    p.yVals = initList();
+    p.xVals = initVector();
+    p.yVals = initVector();
     p.size = 0;
     return p;
 }
 
 void addPoint(Plane* p, const Point point) {
-    appendList(&p->xVals, point.x);
-    appendList(&p->yVals, point.y);
+    appendVector(&p->xVals, point.x);
+    appendVector(&p->yVals, point.y);
     p->size++;
 }
 
 void addPoints(Plane* p, const Point* points, unsigned int count) {
     for (int i = 0; i < count; i++) {
-        appendList(&p->xVals, points[i].x);
-        appendList(&p->yVals, points[i].y);
+        appendVector(&p->xVals, points[i].x);
+        appendVector(&p->yVals, points[i].y);
     }
     p->size += count;
 }
 
-Plane planeFromLists(const List xList, const List yList) {
+Plane planeFromLists(const Vector xList, const Vector yList) {
     Plane p = initPlane();
     
     if (xList.len != yList.len) {
-        printErr("Error: x and y lists must have the same length\n");
+        printErr("Error: x and y vectors must have the same length\n");
     }
     
     for (unsigned int i = 0; i < xList.len; i++) {
-        appendList(&p.xVals, getList(xList, i));
-        appendList(&p.yVals, getList(yList, i));
+        appendVector(&p.xVals, getVector(xList, i));
+        appendVector(&p.yVals, getVector(yList, i));
     }
     p.size = xList.len;
     
@@ -42,8 +42,8 @@ Plane planeFromLists(const List xList, const List yList) {
 
 Point getPoint(const Plane p, unsigned int index) {
     Point point;
-    point.x = getList(p.xVals, index);
-    point.y = getList(p.yVals, index);
+    point.x = getVector(p.xVals, index);
+    point.y = getVector(p.yVals, index);
     return point;
 }
 
@@ -52,8 +52,8 @@ Point* getAllPoints(const Plane p) {
     checkAlloc(points);
     
     for (unsigned int i = 0; i < p.size; i++) {
-        points[i].x = getList(p.xVals, i);
-        points[i].y = getList(p.yVals, i);
+        points[i].x = getVector(p.xVals, i);
+        points[i].y = getVector(p.yVals, i);
     }
     
     return points;

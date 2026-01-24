@@ -1,12 +1,12 @@
 #pragma once
 
 #include "point.h"
-#include "list.h"
+#include "vector.h"
 
 /* A collection of points aka a plane */
 typedef struct {
-    List xVals;
-    List yVals;
+    Vector xVals;
+    Vector yVals;
     unsigned int size;
 } Plane;
 
@@ -20,7 +20,7 @@ void addPoint(Plane* p, const Point point);
 void addPoints(Plane* p, const Point* points, unsigned int count);
 
 /* Create a plane from separate x and y lists */
-Plane planeFromLists(const List xList, const List yList);
+Plane planeFromLists(const Vector xList, const Vector yList);
 
 /* Get a point at an index from the plane */
 Point getPoint(const Plane p, unsigned int index);
