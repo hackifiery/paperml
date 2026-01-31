@@ -7,11 +7,15 @@ file(GLOB_RECURSE ALL_SOURCES
 
 add_library(paperml SHARED ${ALL_SOURCES})
 
-target_include_directories(paperml PUBLIC 
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+target_include_directories(paperml 
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+target_link_libraries(paperml PUBLIC m)
 target_include_directories(paperml PRIVATE include/paperml)
 
 install(TARGETS paperml EXPORT papermlTargets
