@@ -46,3 +46,8 @@
 **/linreg
 **/knn
 **/math_utils
+build/
+CMakeFiles/
+/Makefile
+/CMakeCache.txt
+/cmake_install.cmake
