@@ -8,9 +8,13 @@
 #include <time.h>
 
 db drand(const db lower, const db upper) {
+    db range;
+    db div_;
+
     _RAND_SEED();
-    db range = (upper - lower); 
-    db div_ = RAND_MAX / range;
+
+    range = (upper - lower);
+    div_ = RAND_MAX / range;
     return lower + (rand() / div_);
 }
 

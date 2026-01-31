@@ -89,11 +89,12 @@ void insertVector(Vector* vec, unsigned int index, db value) {
 
 db popAtVector(Vector* vec, unsigned int index) {
     int i;
+    db removed_value;
     if (!vec) return 0.0;
-    
+
     assert(index < vec->len);
     /* Store the value to be removed */
-    db removed_value = vec->arr[index];
+    removed_value = vec->arr[index];
     
     /* Shift elements to the left */
     for (i = index; i < vec->len - 1; i++) {

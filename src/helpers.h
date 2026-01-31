@@ -18,4 +18,4 @@
 
 void printErr(const char* msg);
 
-#endif
+#endif /* PAPERML_HELPERS_H */
