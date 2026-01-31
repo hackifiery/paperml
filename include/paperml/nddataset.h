@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PAPERML_NDDATASET_H
+#define PAPERML_NDDATASET_H
 #include "vector.h"
 
 /* N-dimensional dataset (without labels) */
@@ -18,4 +19,5 @@ void addSampleNDDataset(NDDataset* ds, const Vector sample);
 /* get a sample from ndd at index */
 Vector getSampleNDDataset(const NDDataset ds, unsigned int idx);
 
+#endif /* PAPERML_NDDATASET_H */
 /* TODO: add freeing function */

@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef PAPERML_LINREG_H
+#define PAPERML_LINREG_H
 #include "types.h"
 #include "linear.h"
 #include "plane.h"
@@ -27,3 +29,5 @@ LinearRegression linreg(const Plane pl);
 
 /* Print linear regression results */
 void printLinearRegression(const LinearRegression lr);
+
+#endif /* PAPERML_LINREG_H */

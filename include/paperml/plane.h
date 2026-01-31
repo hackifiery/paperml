@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PAPERML_PLANE_H
+#define PAPERML_PLANE_H
 
 #include "point.h"
 #include "vector.h"
@@ -33,3 +34,5 @@ void clearPlane(Plane* p);
 
 /* Free plane memory */
 void freePlane(Plane* p);
+
+#endif /* PAPERML_PLANE_H */

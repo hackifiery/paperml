@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PAPERML_VECTOR_H
+#define PAPERML_VECTOR_H
 
 #include "types.h"
 
@@ -50,3 +51,5 @@ void sortVector(Vector* vec);
 
 /* Find the most frequent value (majority vote) */
 db majorityVoteVector(const Vector v);
+
+#endif /* PAPERML_VECTOR_H */

@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef PAPERML_LINEAR_H
+#define PAPERML_LINEAR_H
 #include "types.h"
 #include "point.h"
 
@@ -19,3 +21,5 @@ db getLinX(const Linear ln, const db y);
 
 /* Checks if a point is on the line or not */
 int onLinear(const Linear ln, const Point pt);
+
+#endif /* PAPERML_LINEAR_H */

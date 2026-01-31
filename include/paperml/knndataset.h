@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef PAPERML_KNNDATASET_H
+#define PAPERML_KNNDATASET_H
 #include "nddataset.h"
 #include "vector.h"
 
@@ -19,3 +21,5 @@ Vector getSampleKNearestNeighborsDataset(const KNearestNeighborsDataset ds, unsi
 
 /* get the label/target for a sample at index */
 db getSampleLabelKNearestNeighborsDataset(const KNearestNeighborsDataset ds, unsigned int idx);
+
+#endif /* PAPERML_KNNDATASET_H */

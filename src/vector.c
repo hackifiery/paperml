@@ -46,22 +46,12 @@ void attachVector(const Vector src, Vector* dest) {
 }
 
 db getVector(const Vector v, const unsigned int idx) {
-    if (idx >= v.len) {
-        char errorMsg[100];
-        snprintf(errorMsg, sizeof(errorMsg), 
-                 "Error: index %u out of bounds (vector length: %u)\n", idx, v.len);
-        printErr(errorMsg);
-    }
+    assert (idx < v.len);
     return v.arr[idx];
 }
 
 void replaceVector(Vector* v, const unsigned int idx, const db val) {
-    if (idx >= v->len) {
-        char errorMsg[100];
-        snprintf(errorMsg, sizeof(errorMsg), 
-                 "Error: index %u out of bounds (vector length: %u)\n", idx, v->len);
-        printErr(errorMsg);
-    }
+    assert(idx < v->len);
     v->arr[idx] = val;
 }
 
@@ -82,12 +72,7 @@ void insertVector(Vector* vec, unsigned int index, db value) {
     int i;
     if (!vec) return;
     
-    if (index > vec->len) {
-        char errorMsg[100];
-        snprintf(errorMsg, sizeof(errorMsg),
-                 "Error: index %u out of bounds (vector length: %u)\n", index, vec->len);
-        printErr(errorMsg);
-    }
+    assert(index <= vec->len) ;
     
     /* Ensure there's enough capacity */
     _resizeIfNeeded(vec);
@@ -106,13 +91,7 @@ db popAtVector(Vector* vec, unsigned int index) {
     int i;
     if (!vec) return 0.0;
     
-    if (index >= vec->len) {
-        char errorMsg[100];
-        snprintf(errorMsg, sizeof(errorMsg),
-                 "Error: index %u out of bounds (vector length: %u)\n", index, vec->len);
-        printErr(errorMsg);
-    }
-    
+    assert(index < vec->len);
     /* Store the value to be removed */
     db removed_value = vec->arr[index];
     

@@ -17,6 +17,11 @@ target_include_directories(paperml
 
 target_link_libraries(paperml PUBLIC m)
 target_include_directories(paperml PRIVATE include/paperml)
+target_compile_options(paperml PRIVATE -std=c89 -pedantic -Wall -Wextra -Werror=implicit-function-declaration 
+                       -Wformat=2 -Wundef -Wwrite-strings -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align 
+                       -Wstrict-prototypes -Wold-style-definition -Wconversion -Wsign-conversion -Wredundant-decls 
+                       -Wmissing-include-dirs -ansi -g -O2
+)
 
 install(TARGETS paperml EXPORT papermlTargets
     LIBRARY DESTINATION lib

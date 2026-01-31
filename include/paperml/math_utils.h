@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PAPERML_MATH_UTILS_H
+#define PAPERML_MATH_UTILS_H
 #include "types.h"
 #include "vector.h"
 #include "point.h"
@@ -33,3 +34,5 @@ db distance(const Point p1, const Point p2);
 
 /* Min-max normalizer / scaler */
 db minMaxNormalization(Vector* vec);
+
+#endif /* PAPERML_MATH_UTILS_H */

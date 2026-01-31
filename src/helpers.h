@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PAPERML_HELPERS_H
+#define PAPERML_HELPERS_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -15,3 +17,5 @@
 }
 
 void printErr(const char* msg);
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PAPERML_POINT_H
+#define PAPERML_POINT_H
 
 #define EPSILON 1e-12
 #define ORIGIN initPoint(0, 0)
@@ -27,4 +28,5 @@ void orotate(Point* p, const db angleRadians);
 db slope(const Point p1, const Point p2);
 
 /* Check if three points are collinear */
+#endif /* PAPERML_POINT_H */
 int areCollinear(const Point p1, const Point p2, const Point p3);
