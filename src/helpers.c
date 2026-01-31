@@ -1,3 +1,9 @@
+#include <math.h>
 #include "helpers.h"
+#include "types.h"
+#include "point.h"
 
-extern inline void printErr(const char* msg);
+void printErr(const char* msg) {
+    printf("%s", msg);
+    exit(EXIT_FAILURE);
+}

@@ -15,6 +15,8 @@ typedef enum {
 } PlaneSumType;
 
 static db planeSum(const Plane pl, const PlaneSumType pst) {
+    db sum;
+    int i;
     switch (pst) {
         case X: {
             return sumVector(pl.xVals);
@@ -23,14 +25,12 @@ static db planeSum(const Plane pl, const PlaneSumType pst) {
             return sumVector(pl.yVals);
         }
         case XTimesX: {
-            db sum = 0;
-            int i;
+            sum = 0;
             for (i = 0; i < pl.size; i++) sum += pow(pl.xVals.arr[i], 2);
             return sum;
         }
         case XTimesY: {
-            db sum = 0;
-            int i;
+            sum = 0;
             for (i = 0; i < pl.size; i++) sum += pl.xVals.arr[i] * pl.yVals.arr[i];
             return sum;
         }
@@ -43,9 +43,10 @@ static db getErr(const Point p1, const Point p2) {
 }
 
 db getTss(const Plane pl) {
+    int i;
     db meanY = sumVector(pl.yVals) / (db)pl.size;
     db totSumSq = 0;
-    for (int i = 0; i < pl.size; i++) {
+    for (i = 0; i < pl.size; i++) {
         db diff = pl.yVals.arr[i] - meanY;
         totSumSq += diff * diff;
     }
@@ -59,16 +60,17 @@ db getRSquared(const db resSumSq, const db totSumSq) {
 db getRss(const Plane pl, const Linear ln) {
     db sumSqErr = 0;
     int i;
+    Point predicted;
+    Point actual;
+    db err;
     for (i = 0; i < pl.size; i++) {
-        Point predicted;
         predicted.x = pl.xVals.arr[i];
         predicted.y = getLinY(ln, pl.xVals.arr[i]);
         
-        Point actual;
         actual.x = pl.xVals.arr[i];
         actual.y = pl.yVals.arr[i];
         
-        db err = getErr(actual, predicted);
+        err = getErr(actual, predicted);
         sumSqErr += err * err;
     }
     return sumSqErr;
@@ -78,30 +80,40 @@ db getMse(const Plane pl, const Linear ln) {
     return getRss(pl, ln) / pl.size;
 }
 
-LinReg linreg(const Plane pl) {
-    LinReg out;
-    db n = (db)pl.size;
-    db sumX = planeSum(pl, X);
-    db sumY = planeSum(pl, Y);
-    db sumXX = planeSum(pl, XTimesX);
-    db sumXY = planeSum(pl, XTimesY);
+LinearRegression linreg(const Plane pl) {
+    LinearRegression out;
+    db n;
+    db sumX;
+    db sumY;
+    db sumXX;
+    db sumXY;
+    db slope;
+    db intercept;
+    db rss;
+    db tss;
+    
+    n = (db)pl.size;
+    sumX = planeSum(pl, X);
+    sumY = planeSum(pl, Y);
+    sumXX = planeSum(pl, XTimesX);
+    sumXY = planeSum(pl, XTimesY);
     
     /* Least squares formulas */
-    db slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-    db intercept = (sumY - slope * sumX) / n;
+    slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+    intercept = (sumY - slope * sumX) / n;
     
     out.line = initLinear(slope, intercept);
     out.error = getMse(pl, out.line);
     
     /* Calculate R-squared */
-    db rss = getRss(pl, out.line);
-    db tss = getTss(pl);
+    rss = getRss(pl, out.line);
+    tss = getTss(pl);
     out.rSquared = getRSquared(rss, tss);
     
     return out;
 }
 
-void printLinReg(const LinReg lr) {
+void printLinearRegression(const LinearRegression lr) {
     /* ANSI color codes */
     #define RED     "\x1b[31m"
     #define YELLOW  "\x1b[33m"

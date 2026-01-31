@@ -17,7 +17,8 @@ void addPoint(Plane* p, const Point point) {
 }
 
 void addPoints(Plane* p, const Point* points, unsigned int count) {
-    for (int i = 0; i < count; i++) {
+    int i;
+    for (i = 0; i < count; i++) {
         appendVector(&p->xVals, points[i].x);
         appendVector(&p->yVals, points[i].y);
     }
@@ -25,13 +26,14 @@ void addPoints(Plane* p, const Point* points, unsigned int count) {
 }
 
 Plane planeFromLists(const Vector xList, const Vector yList) {
+    int i;
     Plane p = initPlane();
     
     if (xList.len != yList.len) {
         printErr("Error: x and y vectors must have the same length\n");
     }
     
-    for (unsigned int i = 0; i < xList.len; i++) {
+    for (i = 0; i < xList.len; i++) {
         appendVector(&p.xVals, getVector(xList, i));
         appendVector(&p.yVals, getVector(yList, i));
     }
@@ -48,10 +50,11 @@ Point getPoint(const Plane p, unsigned int index) {
 }
 
 Point* getAllPoints(const Plane p) {
+    int i;
     Point* points = (Point*)malloc(p.size * sizeof(Point));
     checkAlloc(points);
     
-    for (unsigned int i = 0; i < p.size; i++) {
+    for (i = 0; i < p.size; i++) {
         points[i].x = getVector(p.xVals, i);
         points[i].y = getVector(p.yVals, i);
     }

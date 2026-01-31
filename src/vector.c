@@ -39,7 +39,8 @@ db popVector(Vector* vec) {
 }
 
 void attachVector(const Vector src, Vector* dest) {
-    for (int i = 0; i < src.len; i++) {
+    int i;
+    for (i = 0; i < src.len; i++) {
         appendVector(dest, src.arr[i]);
     }
 }
@@ -54,10 +55,21 @@ db getVector(const Vector v, const unsigned int idx) {
     return v.arr[idx];
 }
 
+void replaceVector(Vector* v, const unsigned int idx, const db val) {
+    if (idx >= v->len) {
+        char errorMsg[100];
+        snprintf(errorMsg, sizeof(errorMsg), 
+                 "Error: index %u out of bounds (vector length: %u)\n", idx, v->len);
+        printErr(errorMsg);
+    }
+    v->arr[idx] = val;
+}
+
 int findVector(const Vector* vec, db value) {
+    int i;
     if (!vec) return -1;
     
-    for (unsigned int i = 0; i < vec->len; i++) {
+    for (i = 0; i < vec->len; i++) {
         /* Compare floating point values with epsilon */
         if (fabs(vec->arr[i] - value) < 1e-12) {
             return (int)i;
@@ -67,6 +79,7 @@ int findVector(const Vector* vec, db value) {
 }
 
 void insertVector(Vector* vec, unsigned int index, db value) {
+    int i;
     if (!vec) return;
     
     if (index > vec->len) {
@@ -80,7 +93,7 @@ void insertVector(Vector* vec, unsigned int index, db value) {
     _resizeIfNeeded(vec);
     
     /* Shift elements to the right */
-    for (unsigned int i = vec->len; i > index; i--) {
+    for (i = vec->len; i > index; i--) {
         vec->arr[i] = vec->arr[i - 1];
     }
     
@@ -90,6 +103,7 @@ void insertVector(Vector* vec, unsigned int index, db value) {
 }
 
 db popAtVector(Vector* vec, unsigned int index) {
+    int i;
     if (!vec) return 0.0;
     
     if (index >= vec->len) {
@@ -103,7 +117,7 @@ db popAtVector(Vector* vec, unsigned int index) {
     db removed_value = vec->arr[index];
     
     /* Shift elements to the left */
-    for (unsigned int i = index; i < vec->len - 1; i++) {
+    for (i = index; i < vec->len - 1; i++) {
         vec->arr[i] = vec->arr[i + 1];
     }
     
@@ -112,14 +126,17 @@ db popAtVector(Vector* vec, unsigned int index) {
 }
 
 void reverseVector(Vector* vec) {
+    db temp;
+    unsigned int left;
+    unsigned int right;
     if (!vec || vec->len <= 1) return;
     
-    unsigned int left = 0;
-    unsigned int right = vec->len - 1;
+    left = 0;
+    right = vec->len - 1;
     
     while (left < right) {
         /* Swap elements */
-        db temp = vec->arr[left];
+        temp = vec->arr[left];
         vec->arr[left] = vec->arr[right];
         vec->arr[right] = temp;
         
@@ -129,19 +146,22 @@ void reverseVector(Vector* vec) {
 }
 
 db sumVector(const Vector vec) {
+    int i;
     db sum = 0;
-    for (int i = 0; i < vec.len; i++) sum += vec.arr[i];
+    for (i = 0; i < (int)vec.len; i++) sum += vec.arr[i];
     return sum;
 }
 
 void sortVector(Vector* vec) {
+    int i, j;
+    int swapped;
     /* bubblesort for now */
     if (!vec || vec->len <= 1) return;
     
-    for (unsigned int i = 0; i < vec->len - 1; i++) {
-        int swapped = 0;
+    for (i = 0; i < vec->len - 1; i++) {
+        swapped = 0;
         
-        for (unsigned int j = 0; j < vec->len - i - 1; j++) {
+        for (j = 0; j < vec->len - i - 1; j++) {
             if (vec->arr[j] > vec->arr[j + 1]) {
                 db temp = vec->arr[j];
                 vec->arr[j] = vec->arr[j + 1];
@@ -153,4 +173,28 @@ void sortVector(Vector* vec) {
         /* If no swaps occurred, the vector is already sorted */
         if (!swapped) break;
     }
+}
+
+db majorityVoteVector(const Vector v) {
+    int i, j;
+    int maxCount = 0;
+    unsigned int count;
+    db maxVal = 0;
+    
+    if (v.len == 0) return 0;
+    
+    /* Find the value that appears most frequently */
+    for (i = 0; i < v.len; i++) {
+        count = 0;
+        for (j = 0; j < v.len; j++) {
+            if (fabs(v.arr[i] - v.arr[j]) < 1e-12) {
+                count++;
+            }
+        }
+        if (count > maxCount) {
+            maxCount = count;
+            maxVal = v.arr[i];
+        }
+    }
+    return maxVal;
 }

@@ -8,7 +8,7 @@ typedef struct {
     Linear line;
     db error;
     db rSquared;
-} LinReg;
+} LinearRegression;
 
 /* Calculate total sum of squares */
 db getTss(const Plane pl);
@@ -23,7 +23,7 @@ db getMse(const Plane pl, const Linear ln);
 db getRSquared(const db resSumSq, const db totSumSq);
 
 /* Perform linear regression on a plane of points */
-LinReg linreg(const Plane pl);
+LinearRegression linreg(const Plane pl);
 
 /* Print linear regression results */
-void printLinReg(const LinReg lr);
+void printLinearRegression(const LinearRegression lr);

@@ -1,4 +1,5 @@
 #include "point.h"
+#include "math_utils.h"
 
 #include <math.h>
 
@@ -9,22 +10,23 @@ Point initPoint(const db x, const db y) {
     return p;
 }
 
-db distance(const Point p1, const Point p2) {
-    db dx = p2.x - p1.x;
-    db dy = p2.y - p1.y;
-    return sqrt(dx * dx + dy * dy);
-}
-
 void rotate(Point* p, const Point center, const db angleRadians) {
     /* Translate point to origin */
-    db translatedX = p->x - center.x;
-    db translatedY = p->y - center.y;
+    db translatedX;
+    db translatedY;
+    db cosTheta;
+    db sinTheta;
+    db newX;
+    db newY;
+    
+    translatedX = p->x - center.x;
+    translatedY = p->y - center.y;
     
     /* Rotate */
-    db cosTheta = cos(angleRadians);
-    db sinTheta = sin(angleRadians);
-    db newX = translatedX * cosTheta - translatedY * sinTheta;
-    db newY = translatedX * sinTheta + translatedY * cosTheta;
+    cosTheta = cos(angleRadians);
+    sinTheta = sin(angleRadians);
+    newX = translatedX * cosTheta - translatedY * sinTheta;
+    newY = translatedX * sinTheta + translatedY * cosTheta;
     
     /* Translate back */
     p->x = newX + center.x;
@@ -36,7 +38,9 @@ void orotate(Point* p, const db angleRadians) {
 }
 
 db slope(const Point p1, const Point p2) {
-    db dx = p2.x - p1.x;
+    db dx;
+    
+    dx = p2.x - p1.x;
     
     /* Check if denominator is near zero (vertical line) */
     if (fabs(dx) < EPSILON) {
@@ -48,9 +52,11 @@ db slope(const Point p1, const Point p2) {
 
 int areCollinear(const Point p1, const Point p2, const Point p3) {
     /* triangle method: if the triangle's area is 0, they're collinear */
-    db area = p1.x * (p2.y - p3.y) +
-              p2.x * (p3.y - p1.y) +
-              p3.x * (p1.y - p2.y);
+    db area;
+    
+    area = p1.x * (p2.y - p3.y) +
+           p2.x * (p3.y - p1.y) +
+           p3.x * (p1.y - p2.y);
     
     return fabs(area) < EPSILON;
 }

@@ -27,6 +27,9 @@ void attachVector(const Vector src, Vector* dest);
 /* Get the value at an index */
 db getVector(const Vector v, const unsigned int idx);
 
+/* Replaces a value at an index with another */
+void replaceVector(Vector* v, const unsigned int idx, const db val);
+
 /* Find the first occurrence of a value, returns -1 if not found */
 int findVector(const Vector* vec, db value);
 
@@ -44,3 +47,6 @@ db sumVector(const Vector vec);
 
 /* Sort the vector using bubble sort */
 void sortVector(Vector* vec);
+
+/* Find the most frequent value (majority vote) */
+db majorityVoteVector(const Vector v);
