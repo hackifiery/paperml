@@ -42,7 +42,7 @@ static db getErr(const Point p1, const Point p2) {
     return p1.y - p2.y;
 }
 
-db getTss(const Plane pl) {
+db getTotalSumSquared(const Plane pl) {
     int i;
     db meanY = sumVector(pl.yVals) / (db)pl.size;
     db totSumSq = 0;
@@ -57,7 +57,7 @@ db getRSquared(const db resSumSq, const db totSumSq) {
     return 1 - (resSumSq / totSumSq);
 }
 
-db getRss(const Plane pl, const Linear ln) {
+db getResidualSumSquared(const Plane pl, const Linear ln) {
     db sumSqErr = 0;
     int i;
     Point predicted;
@@ -76,8 +76,8 @@ db getRss(const Plane pl, const Linear ln) {
     return sumSqErr;
 }
 
-db getMse(const Plane pl, const Linear ln) {
-    return getRss(pl, ln) / pl.size;
+db getMeanSquaredError(const Plane pl, const Linear ln) {
+    return getResidualSumSquared(pl, ln) / pl.size;
 }
 
 LinearRegression linreg(const Plane pl) {
@@ -103,11 +103,11 @@ LinearRegression linreg(const Plane pl) {
     intercept = (sumY - slope * sumX) / n;
     
     out.line = initLinear(slope, intercept);
-    out.error = getMse(pl, out.line);
+    out.error = getMeanSquaredError(pl, out.line);
     
     /* Calculate R-squared */
-    rss = getRss(pl, out.line);
-    tss = getTss(pl);
+    rss = getResidualSumSquared(pl, out.line);
+    tss = getTotalSumSquared(pl);
     out.rSquared = getRSquared(rss, tss);
     
     return out;

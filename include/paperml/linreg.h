@@ -13,13 +13,13 @@ typedef struct {
 } LinearRegression;
 
 /* Calculate total sum of squares */
-db getTss(const Plane pl);
+db getTotalSumSquared(const Plane pl);
 
 /* Calculate residual sum of squares */
-db getRss(const Plane pl, const Linear ln);
+db getResidualSumSquared(const Plane pl, const Linear ln);
 
 /* Calculate mean squared error */
-db getMse(const Plane pl, const Linear ln);
+db getMeanSquaredError(const Plane pl, const Linear ln);
 
 /* Calculate R-squared from RSS and TSS */
 db getRSquared(const db resSumSq, const db totSumSq);
