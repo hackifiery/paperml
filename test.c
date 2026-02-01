@@ -1,8 +1,5 @@
-#include "linreg.h"
-#include "math_utils.h"
-#include "knn.h"
-#include "knndataset.h"
-#include "vector.h"
+#include <paperml/knn.h>
+#include <paperml/vector.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -15,7 +12,7 @@ int main(void) {
     Vector query3;
     int i;
     int k;
-    db res;
+    double res;
 
     /* Initialize 5D dataset */
     ds = initKNearestNeighborsDataset(5);
@@ -23,16 +20,16 @@ int main(void) {
     /* Add 10 samples with class labels (0.0, 1.0, 2.0) */
     for (i = 0; i < 10; i++) {
         int j;
-        db label;
+        double label;
         samples[i] = initVector();
         
         /* Create varied sample features */
         for (j = 0; j < 5; j++) {
-            appendVector(&samples[i], (db)(i + j) * 0.5);
+            appendVector(&samples[i], (double)(i + j) * 0.5);
         }
         
         /* Alternate class labels */
-        label = (db)(i % 3);
+        label = (double)(i % 3);
         addSampleKNearestNeighborsDataset(&ds, samples[i], label);
     }
 
