@@ -6,10 +6,11 @@
 
 /* internal */
 static void _resizeIfNeeded(Vector* vec) {
+    db* newArr;
 	if (vec->len >= vec->capacity) {
 		unsigned int newCapacity = vec->capacity * VECTOR_GROWTH_FAC;
 		if (newCapacity < VECTOR_INIT_SIZE) newCapacity = VECTOR_INIT_SIZE;
-		db* newArr = (db*)realloc(vec->arr, newCapacity * sizeof(db));
+		newArr = (db*)realloc(vec->arr, newCapacity * sizeof(db));
 		checkAlloc(newArr);
 		vec->arr = newArr;
 		vec->capacity = newCapacity;
