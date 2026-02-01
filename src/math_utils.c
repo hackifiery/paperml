@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-db drand(const db lower, const db upper) {
+db randDouble(const db lower, const db upper) {
     db range;
     db div_;
 
@@ -18,7 +18,7 @@ db drand(const db lower, const db upper) {
     return lower + (rand() / div_);
 }
 
-int irand(const int lower, const int upper) {
+int randInt(const int lower, const int upper) {
     return (rand() % (upper - lower + 1)) + lower;
 }
 

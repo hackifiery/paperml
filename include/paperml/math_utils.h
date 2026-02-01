@@ -20,10 +20,10 @@
 #define inv(x) 1/x
 
 /* Generates a random double from lower to upper. */
-db drand(const db lower, const db upper);
+db randDouble(const db lower, const db upper);
 
 /* Generates a random integer from lower to upper. */
-int irand(const int lower, const int upper);
+int randInt(const int lower, const int upper);
 
 
 /* N-dimensional Euclidean distance between two Vectors */

@@ -26,6 +26,15 @@ Vector initVector(void) {
 	return out;
 }
 
+Vector arrToVector(db arr[], unsigned int size) {
+    int i;
+    Vector out = initVector();
+    for (i = 0; i < size; i++) {
+        appendVector(&out, arr[i]);
+    }
+    return out;
+}
+
 void appendVector(Vector* vec, const db n) {
 	_resizeIfNeeded(vec);
 	vec->arr[vec->len] = n;

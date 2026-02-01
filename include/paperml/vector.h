@@ -16,6 +16,9 @@ typedef struct {
 /* Initialize a Vector */
 Vector initVector(void);
 
+/* Initialize a Vector from a C-style array */
+Vector arrToVector(db arr[], unsigned int size);
+
 /* Append a value to the vector */
 void appendVector(Vector* vec, const db n);
 
