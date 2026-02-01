@@ -1,7 +1,8 @@
 # paperml
 basic machine learning stuff that doesn't do much rly.
 
-## Linear Regression w/noise
+## Linear Regression
+This code demostrates fitting a unvariate linear equation to a set of points (with added noise).
 ```c
 #include <paperml/linreg.h>
 #include <paperml/math_utils.h>
