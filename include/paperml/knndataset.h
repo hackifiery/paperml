@@ -1,4 +1,3 @@
-
 #ifndef PAPERML_KNNDATASET_H
 #define PAPERML_KNNDATASET_H
 #include "nddataset.h"
