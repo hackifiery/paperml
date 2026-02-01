@@ -46,14 +46,14 @@ void attachVector(const Vector src, Vector* dest) {
     }
 }
 
-db getVector(const Vector v, const unsigned int idx) {
-    assert (idx < v.len);
-    return v.arr[idx];
+db getVector(const Vector vec, const unsigned int idx) {
+    assert (idx < vec.len);
+    return vec.arr[idx];
 }
 
-void replaceVector(Vector* v, const unsigned int idx, const db val) {
-    assert(idx < v->len);
-    v->arr[idx] = val;
+void replaceVector(Vector* vec, const unsigned int idx, const db val) {
+    assert(idx < vec->len);
+    vec->arr[idx] = val;
 }
 
 int findVector(const Vector* vec, db value) {
@@ -156,25 +156,25 @@ void sortVector(Vector* vec) {
     }
 }
 
-db majorityVoteVector(const Vector v) {
+db majorityVoteVector(const Vector vec) {
     int i, j;
     int maxCount = 0;
     unsigned int count;
     db maxVal = 0;
     
-    if (v.len == 0) return 0;
+    if (vec.len == 0) return 0;
     
     /* Find the value that appears most frequently */
-    for (i = 0; i < v.len; i++) {
+    for (i = 0; i < vec.len; i++) {
         count = 0;
-        for (j = 0; j < v.len; j++) {
-            if (fabs(v.arr[i] - v.arr[j]) < 1e-12) {
+        for (j = 0; j < vec.len; j++) {
+            if (fabs(vec.arr[i] - vec.arr[j]) < 1e-12) {
                 count++;
             }
         }
         if (count > maxCount) {
             maxCount = count;
-            maxVal = v.arr[i];
+            maxVal = vec.arr[i];
         }
     }
     return maxVal;
