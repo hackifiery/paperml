@@ -1,23 +1,28 @@
 #ifndef PAPERML_MATH_UTILS_H
 #define PAPERML_MATH_UTILS_H
+
 #include "types.h"
 #include "vector.h"
 #include "point.h"
 #include <math.h>
-
-#ifndef _RAND_SEEDED
-#define _RAND_SEEDED 0
-#endif
 
 #ifndef INFINITY
 /* fallback */
 #define INFINITY HUGE_VAL
 #endif
 
-#define _RAND_SEED() if (_RAND_SEEDED) srand(time(NULL));
+#ifndef _RAND_SEEDED
+#define _RAND_SEEDED 0
+#endif
 
+#ifndef M_E
+#define M_E exp(1)
+#endif
+
+#define _RAND_SEED() if (_RAND_SEEDED) srand(time(NULL));
 #define sqr(x) pow((x), 2)
 #define inv(x) 1/x
+#define sigmod(x) 
 
 /* Generates a random double from lower to upper. */
 db randDouble(const db lower, const db upper);
